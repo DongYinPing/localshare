@@ -4,16 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LocalShare - Share Files Freely, Privately</title>
-    <meta name="description" content="LocalShare is a free, open-source file sharing app. Transfer files across devices on your local network — no cloud, no data collection, no limits.">
+    <meta name="description" content="LocalShare is a file sharing app. Transfer files across devices on your local network — no cloud, no data collection, no limits.">
     <style>
         :root {
             --bg: #0f172a;
-            --bg-card: #1e293b;
             --text: #f1f5f9;
             --text-muted: #94a3b8;
             --accent: #38bdf8;
-            --accent-hover: #7dd3fc;
-            --border: #334155;
+            --border: #1e293b;
             --green: #34d399;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,7 +23,6 @@
             line-height: 1.7;
         }
 
-        /* Nav */
         nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 100;
             background: rgba(15, 23, 42, 0.85);
@@ -34,84 +31,67 @@
             padding: 0 2rem;
         }
         .nav-inner {
-            max-width: 1080px; margin: 0 auto;
+            max-width: 720px; margin: 0 auto;
             display: flex; align-items: center; justify-content: space-between;
-            height: 60px;
+            height: 56px;
         }
-        .nav-logo { font-size: 1.2rem; font-weight: 700; color: var(--accent); text-decoration: none; }
+        .nav-logo { font-size: 1.15rem; font-weight: 700; color: var(--accent); text-decoration: none; }
         .nav-links { display: flex; gap: 1.5rem; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
         .nav-links a:hover { color: var(--text); }
 
-        /* Hero */
         .hero {
             min-height: 100vh; display: flex; align-items: center; justify-content: center;
             text-align: center; padding: 6rem 2rem 4rem;
-            background: radial-gradient(ellipse at 50% 0%, rgba(56,189,248,0.08) 0%, transparent 60%);
+            background: radial-gradient(ellipse at 50% 0%, rgba(56,189,248,0.06) 0%, transparent 60%);
         }
-        .hero-content { max-width: 680px; }
-        .hero-badge {
-            display: inline-block; padding: 0.3rem 0.9rem; border-radius: 999px;
-            background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.25);
-            color: var(--accent); font-size: 0.8rem; font-weight: 500; margin-bottom: 1.5rem;
-        }
-        .hero h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.15; margin-bottom: 1.2rem; letter-spacing: -0.02em; }
+        .hero-content { max-width: 600px; }
+        .hero h1 { font-size: 3rem; font-weight: 800; line-height: 1.15; margin-bottom: 1rem; letter-spacing: -0.02em; }
         .hero h1 span { color: var(--accent); }
-        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 540px; margin: 0 auto 2.5rem; }
-        .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-        .btn {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            padding: 0.75rem 1.6rem; border-radius: 10px; font-size: 0.95rem; font-weight: 600;
-            text-decoration: none; transition: all 0.2s; border: none; cursor: pointer;
+        .hero p { font-size: 1.1rem; color: var(--text-muted); }
+
+        .features { padding: 2rem 2rem 4rem; }
+        .features-inner { max-width: 640px; margin: 0 auto; }
+        .feature-row {
+            display: flex; align-items: flex-start; gap: 1.2rem;
+            padding: 1.6rem 0;
+            border-bottom: 1px solid var(--border);
         }
-        .btn-primary { background: var(--accent); color: var(--bg); }
-        .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
-        .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
-        .btn-outline:hover { border-color: var(--text-muted); background: rgba(255,255,255,0.04); }
-
-        /* Sections */
-        section { padding: 3.5rem 2rem; }
-        #features { padding-top: 2rem; }
-        .section-inner { max-width: 1080px; margin: 0 auto; }
-        .section-title { font-size: 1.8rem; font-weight: 700; text-align: center; margin-bottom: 0.8rem; }
-        .section-sub { text-align: center; color: var(--text-muted); max-width: 520px; margin: 0 auto 3rem; font-size: 1rem; }
-
-        /* Features */
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-        .feature-card {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
-            padding: 2rem; transition: border-color 0.2s, transform 0.2s;
+        .feature-row:last-child { border-bottom: none; }
+        .feature-icon {
+            flex-shrink: 0; width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--accent);
         }
-        .feature-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-        .feature-icon { font-size: 1.8rem; margin-bottom: 1rem; }
-        .feature-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
-        .feature-card p { color: var(--text-muted); font-size: 0.9rem; }
+        .feature-icon svg { width: 28px; height: 28px; }
+        .feature-text h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .feature-text p { color: var(--text-muted); font-size: 0.9rem; }
 
-        /* Platforms */
-        .platforms { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .platforms {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+        }
+        .platforms-inner { max-width: 640px; margin: 0 auto; }
+        .platforms h2 { font-size: 1.1rem; font-weight: 600; text-align: center; margin-bottom: 2rem; color: var(--text-muted); }
         .platform-list { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
         .platform-item { text-align: center; }
-        .platform-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .platform-name { font-weight: 600; font-size: 1rem; }
+        .platform-icon { margin-bottom: 0.5rem; }
+        .platform-name { font-weight: 600; font-size: 0.95rem; }
         .platform-detail { color: var(--text-muted); font-size: 0.8rem; }
 
-        /* Privacy */
-        .privacy-box {
-            max-width: 640px; margin: 0 auto; text-align: center;
-            background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.2);
-            border-radius: 14px; padding: 2.5rem;
-        }
-        .privacy-box h3 { color: var(--green); font-size: 1.2rem; margin-bottom: 0.8rem; }
-        .privacy-box p { color: var(--text-muted); font-size: 0.95rem; }
+        .privacy { padding: 3rem 2rem 4rem; }
+        .privacy-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+        .privacy-inner p { color: var(--text-muted); font-size: 0.9rem; }
+        .privacy-inner a { color: var(--green); text-decoration: none; }
+        .privacy-inner a:hover { text-decoration: underline; }
 
-        /* Footer */
         footer {
-            border-top: 1px solid var(--border); padding: 2rem;
-            text-align: center; color: var(--text-muted); font-size: 0.85rem;
+            border-top: 1px solid var(--border); padding: 1.5rem 2rem;
+            text-align: center; color: var(--text-muted); font-size: 0.8rem;
         }
-        footer a { color: var(--accent); text-decoration: none; }
-        footer a:hover { text-decoration: underline; }
-        .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 0.8rem; }
+        .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 0.5rem; }
+        footer a { color: var(--text-muted); text-decoration: none; }
+        footer a:hover { color: var(--text); }
 
         @media (max-width: 640px) {
             .hero h1 { font-size: 2.2rem; }
@@ -129,7 +109,7 @@
         <div class="nav-links">
             <a href="#features">Features</a>
             <a href="#platforms">Platforms</a>
-            <a href="#privacy">Privacy</a>
+            <a href="privacy.html">Privacy</a>
         </div>
     </div>
 </nav>
@@ -137,72 +117,88 @@
 <section class="hero">
     <div class="hero-content">
         <h1>Share Files <span>Freely</span>,<br>Privately</h1>
-        <p>Transfer files between your devices over local network. No cloud upload, no account needed, no data collected. Just fast, private file sharing.</p>
+        <p>Transfer files between your devices over local network. No cloud, no account, no data collected.</p>
     </div>
 </section>
 
-<section id="features">
-    <div class="section-inner">
-        <h2 class="section-title">Why LocalShare</h2>
-        <p class="section-sub">Everything you need for fast, private file transfer — nothing you don't.</p>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">&#9889;</div>
+<section class="features" id="features">
+    <div class="features-inner">
+
+        <div class="feature-row">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div class="feature-text">
                 <h3>Fast Local Transfer</h3>
-                <p>Files move directly between devices over your local network. No internet required, no speed throttled by cloud servers.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">&#128274;</div>
-                <h3>Zero Data Collection</h3>
-                <p>We don't collect, store, or transmit any personal data. Your files stay yours — always.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">&#128241;</div>
-                <h3>Cross-Platform</h3>
-                <p>Share between Android, iOS, and desktop seamlessly. One app for all your devices.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">&#128194;</div>
-                <h3>Any File Type</h3>
-                <p>Photos, videos, audios, documents, and more — automatically sorted into smart categories. Send any file without format restrictions or size limits.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                </div>
-                <h3>Scan to Receive</h3>
-                <p>Receivers don't need to install anything. Just scan a QR code with their browser to preview and download shared files instantly.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">&#128268;</div>
-                <h3>No Account Needed</h3>
-                <p>Open the app and start sharing. No sign-up, no login, no friction.</p>
+                <p>Files move directly between devices over your local network. No internet required.</p>
             </div>
         </div>
+
+        <div class="feature-row">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            </div>
+            <div class="feature-text">
+                <h3>Zero Data Collection</h3>
+                <p>We don't collect, store, or transmit any personal data. Your files stay yours.</p>
+            </div>
+        </div>
+
+        <div class="feature-row">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="feature-text">
+                <h3>Scan to Receive</h3>
+                <p>Receivers need no app installed. Scan a QR code with their browser to download instantly.</p>
+            </div>
+        </div>
+
+        <div class="feature-row">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+            </div>
+            <div class="feature-text">
+                <h3>Any File Type</h3>
+                <p>Photos, videos, audios, documents and more — auto-sorted into smart categories. No format or size limits.</p>
+            </div>
+        </div>
+
+        <div class="feature-row">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <div class="feature-text">
+                <h3>No Account Needed</h3>
+                <p>Open the app and start sharing. No sign-up, no login.</p>
+            </div>
+        </div>
+
     </div>
 </section>
 
-<section id="platforms" class="platforms">
-    <div class="section-inner">
-        <h2 class="section-title">Available on All Platforms</h2>
-        <p class="section-sub">One app, every device you own.</p>
+<section class="platforms" id="platforms">
+    <div class="platforms-inner">
+        <h2>Available on all your devices</h2>
         <div class="platform-list">
             <div class="platform-item">
                 <div class="platform-icon">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="#3DDC84"><path d="M17.523 15.341c-.551 0-.999.448-.999.999s.448.999.999.999.999-.448.999-.999-.448-.999-.999-.999zm-11.046 0c-.551 0-.999.448-.999.999s.448.999.999.999.999-.448.999-.999-.448-.999-.999-.999zm11.404-6.02l1.997-3.459a.416.416 0 00-.152-.567.416.416 0 00-.567.152l-2.022 3.501C16.503 8.672 15.778 8.5 15 8.5H9c-.778 0-1.503.172-2.137.448L4.841 5.447a.416.416 0 00-.567-.152.416.416 0 00-.152.567l1.997 3.459C2.688 11.186.343 14.658.343 18.661h23.313c0-4.003-2.345-7.475-5.785-9.34z"/></svg>
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="#3DDC84"><path d="M17.523 15.341c-.551 0-.999.448-.999.999s.448.999.999.999.999-.448.999-.999-.448-.999-.999-.999zm-11.046 0c-.551 0-.999.448-.999.999s.448.999.999.999.999-.448.999-.999-.448-.999-.999-.999zm11.404-6.02l1.997-3.459a.416.416 0 00-.152-.567.416.416 0 00-.567.152l-2.022 3.501C16.503 8.672 15.778 8.5 15 8.5H9c-.778 0-1.503.172-2.137.448L4.841 5.447a.416.416 0 00-.567-.152.416.416 0 00-.152.567l1.997 3.459C2.688 11.186.343 14.658.343 18.661h23.313c0-4.003-2.345-7.475-5.785-9.34z"/></svg>
                 </div>
                 <div class="platform-name">Android</div>
-                <div class="platform-detail">Android 8.0+</div>
+                <div class="platform-detail">8.0+</div>
             </div>
             <div class="platform-item">
                 <div class="platform-icon">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
                 </div>
                 <div class="platform-name">iOS</div>
-                <div class="platform-detail">iOS 15+</div>
+                <div class="platform-detail">15+</div>
             </div>
             <div class="platform-item">
-                <div class="platform-icon">&#128187;</div>
+                <div class="platform-icon">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="#00ADEF"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+                </div>
                 <div class="platform-name">Desktop</div>
                 <div class="platform-detail">Windows / macOS / Linux</div>
             </div>
@@ -210,12 +206,9 @@
     </div>
 </section>
 
-<section id="privacy">
-    <div class="section-inner">
-        <div class="privacy-box">
-            <h3>Your Privacy Comes First</h3>
-            <p>LocalShare does not collect, store, or transmit any personal or usage data. All file transfers happen directly between your devices over local network. No cloud, no tracking, no compromises. Read our <a href="privacy.html" style="color:var(--green)">Privacy Policy</a> for details.</p>
-        </div>
+<section class="privacy">
+    <div class="privacy-inner">
+        <p>No data collected. No cloud. No tracking. Read our <a href="privacy.html">Privacy Policy</a>.</p>
     </div>
 </section>
 
